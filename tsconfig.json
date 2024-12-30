@@ -1,0 +1,36 @@
+{
+  "compileOnSave": true,
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    // :::: React :::: //
+    "jsx": "react-native",
+    // :::: JS :::: //
+    "allowJs": true,
+    "checkJs": false,
+    // :::: Lint :::: //
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    // :::: Sorcemap :::: //
+    "sourceMap": false,
+    // :::: Etc :::: //
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    // :::: Detail :::: //
+    "disableSizeLimit": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    // :::: Outfile :::: //
+    "removeComments": true,
+    "noEmit": true,
+    // :::: Path :::: //
+    "baseUrl": "src",
+    "paths": {
+      "app/*": ["../app/*"],
+      "assets/*": ["../assets/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+}
