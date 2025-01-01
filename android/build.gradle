@@ -1,0 +1,41 @@
+// 모든 하위 프로젝트/모듈에 공통으로 적용할 구성 옵션을 추가할 수 있는 최상위 빌드 파일입니다.
+
+buildscript {
+	ext {
+		buildToolsVersion = findProperty('android.buildToolsVersion') ?: '35.0.0'
+		minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
+		compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
+		targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
+		kotlinVersion = findProperty('android.kotlinVersion') ?: '1.9.24'
+
+		ndkVersion = "26.1.10909125"
+	}
+	repositories {
+		google()
+		mavenCentral()
+	}
+	dependencies {
+		classpath('com.android.tools.build:gradle')
+		classpath('com.facebook.react:react-native-gradle-plugin')
+		classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+	}
+}
+
+apply plugin: "com.facebook.react.rootproject"
+
+allprojects {
+	repositories {
+		maven {
+			// React Native의 모든 것(JS, Obj-C 소스, Android 바이너리)은 npm에서 설치됩니다.
+			url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
+		}
+		maven {
+			// Android JSC는 npm에서 설치됩니다.
+			url(new File(['node', '--print', "require.resolve('jsc-android/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim(), '../dist'))
+		}
+
+		google()
+		mavenCentral()
+		maven { url 'https://www.jitpack.io' }
+	}
+}
