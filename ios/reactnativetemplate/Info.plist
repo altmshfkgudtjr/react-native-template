@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>myapp</string>
+          <string>appname</string>
           <string>com.nb1111.react-native-template</string>
         </array>
       </dict>
